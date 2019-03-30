@@ -1,0 +1,209 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
+* {
+	font-family: 'Raleway', sans-serif;
+  	color: #333;
+	font-size: 13px;
+	font-weight: normal;
+	letter-spacing: 1px;
+	margin: auto;
+	text-decoration: none;
+}
+body {
+	margin: 0; 
+	padding: 0;
+}
+#main{
+	width: 80%;
+	clear: both;
+}
+#notification {
+	width: 20%;
+	float: left;
+    	height: 498px;
+	margin-right: 1em;
+    	overflow: auto;
+	border: 2px solid #ddd;
+	border-radius: 9px;
+}
+#notification p, #notification a {
+	color: #000;
+	padding: .5em 0 0 .5em;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+#output p {
+	padding: .5em 0 0 .5em;
+	font-size: .8em;
+}
+#output {
+	float: right;
+	width: 75%;
+    	height: 500px;
+    	overflow: auto;
+    	background: #f9f9f9;
+	border: 2px solid #ddd;
+	border-radius: 9px;
+}
+#footer {
+	padding: 2em .5em;
+	margin: auto;
+	font-size: .7em;
+	color: gray;
+	font-style: italic;
+	text-align: center;
+}
+#message, input {
+	clear: both;
+	width: 100%;
+	padding: 10px 20px;
+	border: 2px solid #ddd;
+	border-radius: 9px;
+	margin: .5em auto;
+	background-color: #fff;
+	height: 47px; 
+	font-size: 16px;
+}
+#send {
+	clear: both;
+	width: 100%;
+	background: #6698FF;
+	text-transform: uppercase;
+	color: #fff;
+	font-size: 15px;
+	border: 0;
+	padding: 12px 0;
+	margin: .5em auto;
+	border-radius: 5px;
+}
+#loadmore {
+	clear: both;
+	width: 100%;
+	text-decoration: none;
+	margin-bottom: 1em;
+}
+.btn {
+	border: 1px solid #786450;
+	border-radius: 20px;
+	padding: 5px 20px;
+	font-size: 11px;
+}
+.btn:hover {
+	background-color: #786450;
+	color: white;
+}
+.container4 {
+	float: left;
+	position: relative;
+	width: 3em;
+	height: 3em;
+	overflow: hidden;
+}
+.container4 img {
+	width: 100%;
+}
+#particular_one {
+	width: 100%;
+	clear: both;
+}
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+table th,
+table td {
+  padding: .5em;
+  text-align: left;
+}
+table i {
+	text-transform: Capitalize;
+}
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+@media screen and (max-width: 782px) {
+
+	table {
+	border: 0;
+	}
+	table caption {
+	font-size: 1.3em;
+	}
+	table thead {
+	border: none;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	}
+	table tr {
+	border-bottom: 3px solid #ddd;
+	display: block;
+	margin-bottom: .625em;
+	}
+	table td {
+	border-bottom: 1px solid #ddd;
+	display: block;
+	font-size: .8em;
+	text-align: right;
+	}
+	table td::before {
+	/*
+	* aria-label has no advantage, it won't be read inside a table
+	content: attr(aria-label);
+	*/
+	content: attr(data-label);
+	float: left;
+	font-weight: bold;
+	text-transform: uppercase;
+	}
+	table td:last-child {
+	border-bottom: 0;
+	}
+	.container4 {
+		float: left;
+		position: relative;
+		width: 3em;
+		overflow: hidden;
+		height: 3em;
+		margin: 0;
+		padding: 0;
+	}
+	.container4 img {
+		width: 100%;
+	}
+	#notification {
+		display: none;
+	}
+	#output {
+		width: 100%;
+		height: 500px;
+		margin: auto;
+	}
+	#message, #send {
+		clear: both;
+		width: 100%;
+		margin: 1em auto 0 auto;
+	}
+	#main {
+		width: 90%;
+	}
+}
+
