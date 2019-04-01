@@ -21,13 +21,14 @@ class database {
 		}
 		return $this->array;
 	}
-	function delete_file($table = '', $id = '') {
+	function delete_file_engine($table = '', $id = '') {
 
 		$this->sql = "SELECT image FROM `$table` WHERE id = $id";
 	        $this->array = $this->result($this->sql);
 	
-	        foreach ($this->array as $rows) {
-	            $delete_file = $_SERVER["DOCUMENT_ROOT"] . $upload_dir.$rows["image"];
+		foreach ($this->array as $rows) {
+			print_r($rows);
+	            $delete_file = $_SERVER["DOCUMENT_ROOT"] . '/phpchat2/public/uploads/'.$rows["image"];
 	            unlink($delete_file);
 		}
 		return $this->status;
@@ -47,14 +48,6 @@ class database {
 		return $this->num_rows = mysqli_num_rows($this->resource);
     	}
     	function update_engine($table = '', $_data = array() ) {
-
-		//keeping logs of update
-		$what = $this->get_array_difference($_data, $_SESSION["previousARRAY"]);
-		$nowstamp = $this->get_current_timestamp();
-		$this->sql = "INSERT INTO `log`(time, tablewa, cmd, cmd_user, whoseid, what) VALUES ('$nowstamp', '$table', '1', '$_SESSION[AdminCHATP]', 
-			'$_data[id]', '$what')";
-		$this->query($this->sql, "execute");
-		//LOG creating complete
 
 		$this->sql = $this->create_update_sql($table, $_data);
 		return $this->status = mysqli_query($this->con, $this->sql);
@@ -106,7 +99,7 @@ class database {
 	}
     	function upload_image() {
 
-		$uploaddir = $_SERVER['DOCUMENT_ROOT'] . $upload_dir;
+		$uploaddir = $_SERVER['DOCUMENT_ROOT'] . '/phpchat2/public/uploads/';
 	        $filename = basename($_FILES['image']['name']);
 
 	        if ($filename != '') {

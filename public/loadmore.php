@@ -8,8 +8,11 @@ require_once CLASSES . 'class.user.php';
 $db = new database();
 $user = new user();
 
-$conditions = "WHERE status = 2 ORDER BY id DESC LIMIT $_POST[from], 2";
+$conditions = "ORDER BY id DESC LIMIT $_POST[from], 10";
 $array = $user->get('*', $conditions);
+if ( empty($array)) {
+	echo 'That all we have online';
+}
 utility::member($array);
 echo '<div stye="display: none;" class="loading"></div>';
 

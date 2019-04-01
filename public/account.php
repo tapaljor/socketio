@@ -1,5 +1,9 @@
+<head>
+	<link rel="stylesheet" href="css/login.css"/>
+</head>
 <?php include('head.php'); 
 
+require_once CLASSES . 'class.db.php';
 require_once CLASSES . 'class.user.php';
 require_once CLASSES . 'class.log.php';
 require_once CLASSES . 'class.listregion.php';
@@ -7,6 +11,7 @@ require_once CLASSES . 'class.listcountry.php';
 require_once CLASSES . 'class.likedislike.php';
 require_once CLASSES . 'class.listhobby.php';
 
+$db = new database();
 $user = new user();
 $listregion = new listregion();
 $listcountry = new listcountry();
@@ -35,7 +40,7 @@ if ( isset($_POST["update_image"])) {
 	$status = $user->update($_POST);
 
 	if($status) {
-		header("Location: account.php");
+		header("Location: particular_one.php?idh=$_POST[idh]");
 	} else {
 		echo '<p style="color: #fff;">Error: cannot update</p>';
 	}
@@ -45,181 +50,128 @@ if( isset($_GET["imageedit"]) ) {
 	$_GET = $db->clean_array($_GET);
 
 	$id = $user->match_hash($_GET["imageedit"]);
-
-	$array = $user->get("WHERE id = $id");
+	$array = $user->get('id, image', "WHERE id = $id");
 	foreach($array as $rows) {
 
-		$_SESSION["previousARRAY"] = $rows;
-		echo '<div class="body body-s">';
-		echo '<form action="account.php" method="POST" class="sky-form" enctype="multipart/form-data">';
-			echo '<header>Update image</header>';
-			echo '<fieldset>';
+		echo '<form action="account.php" method="POST" enctype="multipart/form-data" style="width: 40%;">';
 			echo "<input type=\"hidden\" name=\"id\" value=\"$rows[id]\"/>";
+			echo "<input type=\"hidden\" name=\"image2\" value=\"$rows[image]\"/>";
 			echo "<input type=\"hidden\" name=\"idh\" value=\"$_GET[imageedit]\"/>";
-
-			echo '<section class="col col-6">';
-				echo '<label class="label"></label>
-				<label for="file" class="input input-file">
-				<div class="button"><input type="file" name="image" onchange="this.parentNode.nextSibling.value = this.value">Browse for image</div>
-				</label>';
-			echo '</section>';
-			echo '<section class="col col-6">';
-			echo '<input type="submit" name="update_image" class="button" value="Update">';
-			echo '</section>';
-			echo '</fieldset>';
+			echo '<input type="file" name="image" id="file" class="inputfile" />';
+			echo '<label for="file">Upload an image</label><br/>';
+			echo '<button type="submit" name="update_image" class="btn">Update</button>';
 		echo '</form>';
-		echo '</div>';
 	}
 	die();
 }
-
 if ( isset($_POST["update"]) && !empty($_POST["update"])) {
 
 	$_POST = $db->clean_array($_POST);
 
-	if( $_POST["password"] !== $_POST["re_password"]) {
-		//First password and confirm password should match isn't it?
-		 die('<div class="file_error">Password not matching</div>');
-	}
-
-	if ( isset($_POST["password"]) && !empty($_POST["password"])) {
-
-		$salt = utility::create_token();
-		$_POST["password"] = md5(md5($_POST["password"]).$salt);
-		//First it hash plain password THEN added salt on it, then it is hashed again
-		$_POST["salt"] = $salt;
-	} else {
+	$idh = $_POST["idh"];
+	if ( isset($_POST["re_password"]) && !empty($_POST["re_password"])) {
+		$_POST["salt"] = utility::create_token();
+		$_POST["password"] = md5(md5($_POST["password"]).$_POST["salt"]);
+	} else { 
 		unset($_POST["password"]);
 	}
-
 	unset($_POST["re_password"]);
 	unset($_POST["change_password"]);
+	unset($_POST["idh"]);
 	unset($_POST["update"]);
 
 	$status = false;
 	$status = $user->update($_POST);
 	if ( $status) {
-		header("Location: account.php");
+		header("Location: particular_one.php?idh=$idh");
 	}
 }
 if( isset($_GET["edit"]) && !empty($_GET["edit"]) ) {
 
 	$id = $user->match_hash($_GET["edit"]);
 
+	if ( $_GET["edit"] !== $_SESSION["idhashCHATP"]) {
+		die('Cannot find one');
+	}	
+
 	$conditions ="WHERE id = $id";
-	$array = $user->get($conditions);
+	$array = $user->get('id, username, gender, country, region, hobby', $conditions);
 
 	foreach($array as $rows) {
-	
-		$_SESSION["previousARRAY"] = $rows;
-		$idh = md5($rows["id"].$_SESSION["tsa_gong"]);
-		?>
+	?>
+		<form action="account.php" method="POST">
 
-		<div class="body body-s">
-		<form action="account.php" method="POST" class="sky-form" enctype="multipart/form-data">
-
-			<header><span id="status" style="border: none; margin: 0;">Edit account information</span></header>
 			<input type="hidden" name="id" value="<?php echo $rows["id"];?>"/>
-			<fieldset>					
-			<section>
-				<a href="#" onclick="change_pass(); return false;"/>Click here to change password</a>
-			</section>
-			<section style="display: none;" id="password1">
-				<label class="input">
-				<input placeholder="Password" type="password" id="password" name="password">
-				<b class="tooltip tooltip-bottom-right">First password, better with alphanumeric</b>
-				</label>
-			</section>
-			<section style="display: none;" id="password2">
-				<label class="input">
-				<input placeholder="Confirm password" type="password" id="re_password" name="re_password" onchange="compare_password(password, re_password);">
-				<b class="tooltip tooltip-bottom-right">Please confirm password</b>
-				</label>
-			</section>
-			<section>
-				Gender:
-				<label class="select">
-				<select name="gender">
-				<?php 
-					if ( $rows["gender"] == 1) {
-						echo '<option value="1">Male</p>';
-					} 
-					else if($rows["gender"] == 2) {
-						echo '<option value="2">Female</p>';
-					} 
-					else if($rows["gender"] == 3) {
-						echo '<option value="3">Transgender</p>';
-					}
-				?>
-					<option value="1">Male</option>
-					<option value="2">Female</option>
-					<option value="3">Transgender</option>
-				</select>
-				</label>
-			</section>
-			<section>
-				Country:
-				<label class="select">
-				<select name="country" required onchange="getlistregion(this.value); return false;">
-				<?php
-				$array1 = $listcountry->get("WHERE code = '$rows[country]'");
+			<input type="hidden" name="idh" value="<?php echo $_GET["edit"];?>"/>
+			<a href="#" onclick="change_pass(); return false;"/>Change password</a>
+			<input type="text" name="username" value="<?php echo $rows["username"];?>" onchange="check_username(this.value)">
+			<div class="validate_username"></div>
+			<div style="display: none;" id="password1">
+				<input placeholder="Password" type="password" name="password">
+				<input placeholder="Confirm password" type="password" name="re_password" onchange="compare_password(password, re_password);">
+			</div>
+			<div class="validate_password"></div>
+			Gender:
+			<select name="gender">
+			<?php 
+				if ( $rows["gender"] == 1) {
+					echo '<option value="1">Male</p>';
+				} 
+				else if($rows["gender"] == 2) {
+					echo '<option value="2">Female</p>';
+				} 
+				else if($rows["gender"] == 3) {
+					echo '<option value="3">Other</p>';
+				}
+			?>
+				<option value="1">Male</option>
+				<option value="2">Female</option>
+				<option value="3">Other</option>
+			</select>
+			Country:
+			<select name="country" required onchange="getlistregion(this.value); return false;">
+			<?php
+				$array1 = $listcountry->get('*', "WHERE code = '$rows[country]'");
 				foreach($array1 as $rows1) {
 					echo "<option value=\"$rows1[code]\">$rows1[name]</option>";
 				}	
-				$array1 = $listcountry->get();
+				$array1 = $listcountry->get('*', '');
 				foreach($array1 as $rows1) {
 					echo "<option value=\"$rows1[code]\">$rows1[name]</option>";
 				}		
 				?>
-				</select>
-				</label>
-			</section>
-			<section id="listregion">
+			</select>
+			Region:
+			<div id="listregion">
+			<select name="region">
 				Region:
-				<label class="select">
-				<select name="region">
 				<?php
-				$array1 = $listregion->get("WHERE id = $rows[region]");
+				$array1 = $listregion->get('*', "WHERE id = $rows[region]");
 				foreach($array1 as $rows1) {
 					echo "<option value=\"$rows1[id]\">$rows1[name]</option>";
 				}	
-				$array1 = $listregion->get();
+				$array1 = $listregion->get('*', '');
 				foreach($array1 as $rows1) {
 					echo "<option value=\"$rows1[id]\">$rows1[name]</option>";
 				}		
 				?>
-				</select>
-				</label>
-			</section>
-			<section>
-				Hobby:
-				<label class="select">
-				<select name="hobby">
+			</select>
+			</div>
+			Hobby:
+			<select name="hobby">
 				<?php
-				$array1 = $listhobby->get("WHERE id = $rows[hobby]");
+				$array1 = $listhobby->get('*', "WHERE id = $rows[hobby]");
 				foreach($array1 as $rows1) {
 					echo "<option value=\"$rows1[id]\">$rows1[name]</option>";
 				}	
-				$array1 = $listhobby->get();
+				$array1 = $listhobby->get('*', '');
 				foreach($array1 as $rows1) {
 					echo "<option value=\"$rows1[id]\">$rows1[name]</option>";
 				}		
 				?>
-				</select>
-				</label>
-			</section>
-			<section>
-				Bio data:
-				<label class="textarea">
-				<textarea name="biodata"><?php echo $rows["biodata"];?></textarea>
-				</label>
-			</section>
-		</fieldset>
-		<footer>
-			<button type="submit" name="update" class="button"value="Update">Update</button>
-		</footer>
+			</select>
+			<button type="submit" name="update" class="btn" value='update'>Update</button>
 		</form>
-		</div>
 	<?php
 	}
 	die();
@@ -295,7 +247,6 @@ if( isset($_SESSION["idCHATP"]) && !empty($_SESSION["idCHATP"])) {
 		}
 	}
 } 
-
 include('footer.php');
 
 

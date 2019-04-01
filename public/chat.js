@@ -3,24 +3,34 @@ var socket = io.connect('http://localhost:4000');
 
 var message = document.getElementById('message');
 var handle = document.getElementById('handle');
+var user = document.getElementById('user');
+var destination = document.getElementById('destination');
 var messageform = document.getElementById('messageform');
 
 //When event magic happens from client/front end
 socket.on('connect', function() {
-	socket.emit('new connection', handle.value);
+	socket.emit('new connection', user.value);
 });
 messageform.addEventListener('submit', function(e) {
 
 	e.preventDefault();
 	var data = {
 		message: message.value,
-		handle: handle.value
+		handle: handle.value,
+		user: user.value,
+		destination: destination.value
 	};
 	$("#message").val('');
 	socket.emit('chat', data);
 });
 message.addEventListener('keypress', function() {
-	socket.emit('typing', handle.value);
+
+	var data = {
+		user: user.value,
+		handle: handle.value,
+		destination: destination.value
+	};
+	socket.emit('typing', data);
 });
 
 //Events from server
@@ -32,9 +42,16 @@ socket.on('disconnect', function() {
 });
 socket.on('chat', function(data) {
 	feedback.innerHTML = 'Send';
-	output.innerHTML = '<p><b>'+data.handle+':</b> '+data.message+'</p>'+output.innerHTML;
+	if ( (data.destination === handle.value &&  
+		destination.value === data.handle ) ||
+		handle.value === data.handle
+		) { 
+		output.innerHTML = '<p><b>'+data.user+':</b> '+data.message+'</p>'+output.innerHTML;
+	}
 });
 socket.on('typing', function(data) {
-	feedback.innerHTML = '<i>'+data+' is typing..</i>';
+	if ( data.handle === destination.value && data.destination === handle.value) {
+		feedback.innerHTML = '<i>'+data.user+' is typing..</i>';
+	}
 });
 

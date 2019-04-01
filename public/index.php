@@ -24,11 +24,14 @@ if ( isset($_POST["login"]) && !empty($_POST["login"])) {
 
 	$_POST = $user->clean_array($_POST);
 
-	utility::pr($_POST);
-
 	$status = false;
 	$status = $user->check_login($_POST["username"], $_POST["password"]);
 	if ( $status) {
+		$data = array(
+			'id'=>$_SESSION["idCHATP"],
+			'status'=>2
+		);
+		$user->update($data);
 		header('Location: home.php');
 	} else {
 		echo 'access denied';

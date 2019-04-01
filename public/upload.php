@@ -104,7 +104,6 @@ if ( isset($_POST["register"])  && !empty($_POST["register"]) ) {
 		$conditions = "WHERE username = '$_POST[username]'";
 		$array = $user->get('id, username', $conditions);
 		foreach ( $array as $rows) {
-
 			$_SESSION["tsa_gong"] = utility::create_token();
 			$_SESSION["AdminCHATP"] = $rows["username"];
 			$_SESSION["idCHATP"] = $rows["id"];

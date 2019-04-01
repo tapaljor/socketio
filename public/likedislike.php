@@ -30,6 +30,14 @@ if( isset($_POST) ) {
 
 		$likedislike->add($_data);
 	}
+
+	$conditions = "WHERE loginid = $loginid && type = 1";
+	$likes = $likedislike->get_total_rows($conditions);
+	echo '<span style="color: green; font-family: times new roman, sans-serif; text-transform: uppercase;">'.$likes.' likes, </span>';
+
+	$conditions = "WHERE loginid = $loginid && type = 0";
+	$dislikes = $likedislike->get_total_rows($conditions);
+	echo '<span style="color: red; font-family: times new roman, sans-serif; text-transform: uppercase;">'.$dislikes.' dislikes</span>';
 } 
   
 

@@ -17,9 +17,9 @@ if ( isset($_POST["search"]) && !empty($_POST["search"])) {
  	die();
 }
 echo '<div id="loadmore">';
-	$conditions = "WHERE status = 2 ORDER BY id DESC LIMIT 0, 2";
+	$conditions = "ORDER BY id DESC LIMIT 0, 10";
  	$array = $user->get('*', $conditions); //Loading page one after another first the start page is 0
- 	utility::member($array, 0);
+	utility::member($array, 0);
 echo '</div>';
-echo "<a href='#' class='btn' onclick=\"loadmore(); return false;\">LOAD MORE</a>";
+	echo "<br/><p style='text-align: center;'><a href='#' class='btn' onclick=\"loadmore(); return false;\">LOAD MORE</a></p>";
 require('footer.php');?>

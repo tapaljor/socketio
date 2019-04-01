@@ -8,8 +8,8 @@ $user = new user();
 
 $users = $user->get_num_rows("WHERE username = '$_POST[username]'");
 if ( $users > 0 ) {
-	echo '<span style="color: red;">Username is already taken</span>';
+	echo json_encode(array('success'=> 0));
 } else {
-	echo '<span style="color: green;">Username available</span>';
+	echo json_encode(array('success'=> 1));
 }	
 

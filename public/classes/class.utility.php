@@ -91,12 +91,15 @@ class utility {
 					}	
 					echo '</a>';
 				} else {
-					echo "<a href=\"particular_one.php?idh=$idh\"><img src=\"upload/$rows[image]\" title='Click here for detail'/></a>";
+					echo "<a href=\"particular_one.php?idh=$idh\"><img src=\"uploads/$rows[image]\" title='Click here for detail'/></a>";
 				}
 				echo '</td>';
 					$array1 = $listhobby->get('name', "WHERE id = $rows[hobby]");
 					foreach($array1 as $rows1) {
 						$hobby = $rows1["name"];
+					}
+					if ( empty($array1)) {
+						$hobby = 'NA';
 					}
 				echo "<td><a href=\"particular_one.php?idh=$idh\">".$rows["username"].'<br/><i>'.$hobby.'</i></a></td>';
 				echo '<td>';
@@ -105,8 +108,6 @@ class utility {
 					} else {
 						echo '<i>Female </i>';
 					}
-				echo '</td>';
-				echo '<td>';
 					if ( $rows["status"] == 2) {
 						echo '<span style="color: green;"> (Online)</span>';
 					} else {
@@ -116,12 +117,12 @@ class utility {
 				echo '<td>';
 					$array1 = $listregion->get('name, countrycode', "WHERE id = $rows[region]");
 					foreach($array1 as $rows1) {
-						echo $rows1["name"].'<br/>';
+						echo $rows1["name"].' ';
 						echo $rows1["countrycode"];
 					}
 				echo '</td>';
 				echo '<td>';
-					echo "<a href=\"home.php?destinationh=$idh\" class='btn'>Start chat</a>";
+					echo "<a href=\"home.php?destinationh=$idh\" class='btn' style='font-size: 9px;'>Start chat</a>";
 				echo '</td>';
 			$count++;
 		}

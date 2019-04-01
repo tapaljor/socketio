@@ -29,7 +29,10 @@ class user extends database {
 		$this->sql = "SELECT $fields FROM `$this->table` $conditions";
 		$this->array = $this->result($this->sql);
 		return $this->array;
-    	}
+	}
+	function delete_file($id = '') {
+		return $this->delete_file_engine($this->table, $id);
+	}
 	function delete() {
 		return $this->status = $this->delete_engine($this->table, $_SESSION["idCHATP"]);
 	}

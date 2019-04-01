@@ -1,4 +1,4 @@
-from = 3;
+from = 11;
 function loadmore() {
 
 	$.ajax ({
@@ -11,7 +11,7 @@ function loadmore() {
 		success: function(data) {
 			$(".loading").hide();//hiding loading once content loaded
 			$("#loadmore").append(data);
-			from += 2;
+			from += 10;
 		},
 	});
 }
@@ -23,13 +23,26 @@ function check_username(username) {
 		data: { username: username },
 
 		success: function(data) {
-			$(".validate_username").html(data);
-		}
+
+			data = JSON.parse(data);
+			if(data.success === 0) {
+				$(".validate_username").html('<span style="color: red;">Already taken<span>');
+				$(".btn").hide();
+			} else {
+				$(".validate_username").html('<span style="color: green;">Available<span>');
+				$(".btn").show();
+			}
+		},
 	});
 }
 function change_pass() {
 
-	$("#password1, #password2").show();
+	var x = document.getElementById('password1');
+	if (x.style.display === 'none') {
+    		x.style.display = 'block';
+	} else {
+    		x.style.display = 'none';
+   	}
 }
 function compare_password(password, re_password) {
 
@@ -38,8 +51,10 @@ function compare_password(password, re_password) {
 
 	if(password != re_password) {
 		$(".validate_password").html('<span style="color: red;">Password mismatched</span>');
+		$(".btn").hide();
 	} else {
 		$(".validate_password").html('<span style="color: green;">Password matched</div>');
+		$(".btn").show();
 	}
 }
 function search_ads(obj) {
@@ -91,7 +106,7 @@ function likedislike(loginidhash1, likeridhash1, type1) {
 		data: { loginidhash: loginidhash1, likeridhash: likeridhash1, type: type1 },
 
 		success: function(data) {
-			$(".big-text").load();
+			$(".likedislike").html(data);
 		}
 	});
 }

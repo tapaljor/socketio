@@ -12,9 +12,10 @@ body {
 	margin: 0; 
 	padding: 0;
 }
-#main{
+#main {
+	margin: auto;
 	width: 80%;
-	clear: both;
+	padding-top: 4.5em;
 }
 #notification {
 	width: 20%;
@@ -77,9 +78,8 @@ body {
 }
 #loadmore {
 	clear: both;
-	width: 100%;
+	width: 80%;
 	text-decoration: none;
-	margin-bottom: 1em;
 }
 .btn {
 	border: 1px solid #786450;
@@ -94,16 +94,12 @@ body {
 .container4 {
 	float: left;
 	position: relative;
-	width: 3em;
-	height: 3em;
+	width: 7em;
+	height: 4em;
 	overflow: hidden;
 }
 .container4 img {
 	width: 100%;
-}
-#particular_one {
-	width: 100%;
-	clear: both;
 }
 table {
   border: 1px solid #ccc;
@@ -133,7 +129,30 @@ table i {
 table th {
   font-size: .85em;
   letter-spacing: .1em;
-  text-transform: uppercase;
+}
+.inputfile {
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+	clear: both;
+}
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: #333;
+    background-color: black;
+    display: inline-block;
+    border: 1px solid #ddd;
+	padding: 1em;
+	background-color: #fff;
+	border-radius: 9px;
+	margin: 0 0 1em 0;
+}
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: #ddd;
 }
 @media screen and (max-width: 782px) {
 
