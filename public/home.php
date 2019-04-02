@@ -13,7 +13,6 @@ if ( isset($_GET["logout"]) && !empty($_GET["logout"])) {
 		'status'=>0
 	);
 	$user->update($data);
-	die();
 
 	session_destroy();
 	header('Location: index.php');

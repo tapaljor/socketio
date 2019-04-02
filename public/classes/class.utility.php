@@ -81,7 +81,7 @@ class utility {
 
 			$idh = md5($rows["id"].md5($_SESSION["tsa_gong"]));
 	
-				echo '<tr><td class="container4">';
+				echo '<tr><td style="height: 75px;"><div class="container4">';
 				if ( empty($rows["image"]) ) {
 					echo "<a href=\"particular_one.php?idh=$idh\" title='Click here for detail'>";
 					if( $rows["gender"] == 1) { 
@@ -93,7 +93,7 @@ class utility {
 				} else {
 					echo "<a href=\"particular_one.php?idh=$idh\"><img src=\"uploads/$rows[image]\" title='Click here for detail'/></a>";
 				}
-				echo '</td>';
+				echo '</div></td>';
 					$array1 = $listhobby->get('name', "WHERE id = $rows[hobby]");
 					foreach($array1 as $rows1) {
 						$hobby = $rows1["name"];
