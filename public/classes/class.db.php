@@ -12,8 +12,10 @@ class database {
     	function __construct() {
 		$this->con = mysqli_connect(LOCALHOST, USERNAME, PASSWORD, DBNAME);
 	}
+	function execute_engine($sql = '') {
+		return $this->status = mysqli_query($this->con, $sql);
+	}
 	function result($sql = '') {
-
 		$this->array = array();
 		$this->resource = mysqli_query($this->con, $sql);
 		while($rows = mysqli_fetch_assoc($this->resource)) {
@@ -22,7 +24,6 @@ class database {
 		return $this->array;
 	}
 	function delete_file_engine($table = '', $id = '') {
-
 		$this->sql = "SELECT image FROM `$table` WHERE id = $id";
 	        $this->array = $this->result($this->sql);
 	
@@ -34,7 +35,6 @@ class database {
 		return $this->status;
 	}
     	function delete_engine($table = '', $id = '') {
-
         	$this->sql = "DELETE FROM `$table` WHERE id = $id";
 		$this->status = $this->query($con, $this->sql);
 		if ( $this->status) {
@@ -180,16 +180,10 @@ class database {
 		return $this->nowstamp;
 	}
 	function match_hash_engine($table = '', $hash = '') {
-
-		$this->sql = "SELECT id FROM `$table`";
+		$this->sql = "SELECT id FROM `$table` WHERE MD5(CONCAT(id, MD5('$_SESSION[tsa_gong]'))) = '$hash'";
 		$this->array = $this->result($this->sql);
 		foreach ($this->array as $rows) {
-
-	            if ($hash === md5($rows["id"].md5($_SESSION["tsa_gong"])) ) {
-
-	            	$this->id = $rows["id"];
-			break;
-	            }
+	            $this->id = $rows["id"];
 	        }
 		//Checking whether id is numeric or not, as it shouldn't be other than alphnumeric 
 		utility::is_numeric($this->id);

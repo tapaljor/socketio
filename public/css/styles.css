@@ -21,10 +21,15 @@ body {
 	width: 20%;
 	float: left;
     	height: 498px;
-	margin-right: 1em;
     	overflow: auto;
-	border: 2px solid #ddd;
-	border-radius: 9px;
+	border-right: .5px solid #ddd;
+}
+#content {
+	float: right;
+	width: 77%;
+}
+#notification a, p {
+	font-size: 10px;
 }
 #notification p, #notification a {
 	color: #000;
@@ -32,20 +37,31 @@ body {
 	text-transform: uppercase;
 	text-decoration: none;
 }
-#output p {
-	padding: .5em 0 0 .5em;
-	font-size: .8em;
-}
 #output {
-	float: right;
-	width: 75%;
     	height: 500px;
     	overflow: auto;
-    	background: #f9f9f9;
-	border: 2px solid #ddd;
-	border-radius: 9px;
+	border: none;
+}
+#output legend {
+	background-color: #ddd;
+	padding: .7em;
+	text-transform: uppercase;
+	border-radius: 5px;
+	margin-left: -1%;
+}
+#output p {
+	padding: .5em 0 0 .5em;
+	font-size: 1em;
+}
+#output b {
+	text-transform: uppercase;
+}
+.italic {
+	text-decoration: italic;
+	text-transform: Capitalize;
 }
 #footer {
+	clear: both;
 	padding: 2em .5em;
 	margin: auto;
 	font-size: .7em;
@@ -99,6 +115,20 @@ body {
 }
 .container4 img {
 	width: 100%;
+}
+#new_message p {
+	text-transform: uppercase;
+	color: red;
+}
+h6 {
+	text-align: center;
+	border: 2px solid #ddd;
+	border-radius: 9px;
+	color: red;
+	width: 50%;
+	padding: 1em;
+	text-transform: uppercase;
+	margin: 1em auto;
 }
 table {
   border: 1px solid #ccc;
@@ -206,7 +236,7 @@ table th {
 		display: none;
 	}
 	#output {
-		width: 100%;
+		width: 90%;
 		height: 500px;
 		margin: auto;
 	}
@@ -217,6 +247,9 @@ table th {
 	}
 	#main {
 		width: 90%;
+	}
+	#content {
+		width: 100%;
 	}
 }
 

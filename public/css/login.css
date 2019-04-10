@@ -63,6 +63,16 @@ h1 {
   font-weight: normal;
   text-align: center;
 }
+h6 {
+	text-align: center;
+	border: 2px solid #ddd;
+	border-radius: 9px;
+	color: red;
+	width: 50%;
+	padding: 1em;
+	text-transform: uppercase;
+	margin: 1em auto;
+}
 @media screen and (max-width: 782px) {
  form {
   	 width: 80%;

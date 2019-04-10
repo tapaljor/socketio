@@ -1,48 +1,45 @@
 <?php
-namespace ChatApp;
 
-use Ratchet\MessageComponentInterface;
-use Ratchet\ConnectionInterface;
+class chat extends database {
 
-class Chat implements MessageComponentInterface {
+    	private $array = array();
+	private $table = 'chat';//accessible on in this class, no other classes or PHP outside
+	private $sql = false;
+	private $status = false;
+	private $num_rows = false;
 
-	protected $clients = false;
-	private $welcome = false;
-	private $array = array();
-
-	public function __construct() {
-		$this->clients = new \SplObjectStorage;
+	function execute($conditions = '') {
+		$this->sql = "UPDATE `$this->table` SET $conditions";
+		return $this->status = $this->execute_engine($this->sql);
 	}
-	public function onOpen(ConnectionInterface $conn) {
-
-		//store the new connection
-		$this->clients->attach($conn);
- 		$this->welcome = "{$conn->resourceId} joined";        
-
-		//Converting to JSON
-		$this->array = array (
-			'message'=>$this->welcome
-			);
-		$this->welcome = json_encode($this->array);
-		foreach($this->clients as $client) {
-			$client->send($this->welcome);
-		}
+	function get($fields, $conditions = '') {
+		$this->sql = "SELECT $fields FROM `$this->table` $conditions";
+		$this->array = $this->result($this->sql);
+		return $this->array;
 	}
-	public function onMessage(ConnectionInterface $from, $msg) {
-
-		//send the message to all clients connected
-		foreach($this->clients as $client) {
-			$client->send($msg);
-		}
+	function delete_file($id = '') {
+		return $this->delete_file_engine($this->table, $id);
 	}
-	public function onClose(ConnectionInterface $conn) {
-
-		$this->clients->detach($conn);
-		echo "Somone has disconnected\n";
+	function delete() {
+		return $this->status = $this->delete_engine($this->table, $_SESSION["idCHATP"]);
 	}
-	public function onError(ConnectionInterface $conn, \Exception $e) {
+    	function get_users_username($conditions = '') {
+		$this->sql = "SELECT username FROM `$this->table` $conditions";
+		$this->users = $this->result($this->sql);
 
-		echo "An error has ocured: {$e->getMessage()}\n";
-		$conn->close();
+		return $this->users;
+    	}
+	function get_num_rows($conditions = '') {
+		$this->sql = "SELECT * FROM `$this->table` $conditions";
+		return $this->num_rows = $this->get_num_rows_engine($this->sql);
+	}
+    	function add( $array = array() ) {
+		return $this->insert_engine($this->table, $array);
+    	}
+	function update($array = array() ) {
+		return $this->update_engine($this->table, $array);
+	}
+	function match_hash($hash = '') {
+		return $this->match_hash_engine($this->table, $hash);
 	}
 }

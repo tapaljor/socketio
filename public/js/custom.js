@@ -28,7 +28,12 @@ function check_username(username) {
 			if(data.success === 0) {
 				$(".validate_username").html('<span style="color: red;">Already taken<span>');
 				$(".btn").hide();
-			} else {
+			} 
+			else if ( data.success === 3) {
+				$(".validate_username").html('<span style="color: red;">Alpha numeric only<span>');
+				$(".btn").hide();
+			}
+			else {
 				$(".validate_username").html('<span style="color: green;">Available<span>');
 				$(".btn").show();
 			}

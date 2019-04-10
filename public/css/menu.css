@@ -15,9 +15,6 @@ a {
   z-index: 3;
   position: fixed;
 }
-#header .logo img {
-  width: 50px;
-}
 #header ul {
   margin: 0;
   padding: 0;
@@ -33,10 +30,10 @@ a {
 #header .menu-btn:hover {
   background-color: #f4f4f4;
 }
-#header .logo {
+#header .logo{
   display: block;
   float: left;
-  font-size: 3em;
+  font-size: 2em;
   text-decoration: none;
   padding: 0 10px;
 }

@@ -32,12 +32,11 @@ if ( isset($_POST["login"]) && !empty($_POST["login"])) {
 			'status'=>2
 		);
 		$user->update($data);
-		header('Location: home.php');
+		header('Location: welcome.php');
 	} else {
-		echo 'access denied';
+		echo '<h6>access denied</h6>';
 	}
 }
-
 ?>
 <form action="index.php" method="POST">
 	<h1>LOGIN</h1>

@@ -66,65 +66,41 @@ class utility {
 
 		require_once 'config.php';
 		require_once CLASSES . 'class.db.php';
-		require_once CLASSES . 'class.likedislike.php';
-		require_once CLASSES . 'class.listregion.php';
 		require_once CLASSES . 'class.listhobby.php';
 
 		$db = new database();
-		$likedislike = new likedislike();
-		$listregion = new listregion();
 		$listhobby = new listhobby();
 		
-		$count = 0;
 		echo '<table>';
 		foreach ( $array as $rows) {
 
 			$idh = md5($rows["id"].md5($_SESSION["tsa_gong"]));
 	
-				echo '<tr><td style="height: 75px;"><div class="container4">';
-				if ( empty($rows["image"]) ) {
-					echo "<a href=\"particular_one.php?idh=$idh\" title='Click here for detail'>";
-					if( $rows["gender"] == 1) { 
-						echo '<img src="images/male.jpeg"/>';
-					} else {
-						echo '<img src="images/female.jpeg"/>';
-					}	
-					echo '</a>';
+			echo '<tr><td style="height: 75px;"><div class="container4">';
+			if ( empty($rows["image"]) ) {
+				echo "<a href=\"particular_one.php?idh=$idh\" title='Click here for detail'>";
+				if( $rows["gender"] == 1) { 
+					echo '<img src="images/male.jpeg"/>';
 				} else {
-					echo "<a href=\"particular_one.php?idh=$idh\"><img src=\"uploads/$rows[image]\" title='Click here for detail'/></a>";
+					echo '<img src="images/female.jpeg"/>';
+				}	
+				echo '</a>';
+			} else {
+				echo "<a href=\"particular_one.php?idh=$idh\"><img src=\"uploads/$rows[image]\" title='Click here for detail'/></a>";
+			}
+			echo '</div></td>';
+				$array1 = $listhobby->get('name', "WHERE id = $rows[hobby]");
+				foreach($array1 as $rows1) {
+					$hobby = $rows1["name"];
 				}
-				echo '</div></td>';
-					$array1 = $listhobby->get('name', "WHERE id = $rows[hobby]");
-					foreach($array1 as $rows1) {
-						$hobby = $rows1["name"];
-					}
-					if ( empty($array1)) {
-						$hobby = 'NA';
-					}
-				echo "<td><a href=\"particular_one.php?idh=$idh\">".$rows["username"].'<br/><i>'.$hobby.'</i></a></td>';
-				echo '<td>';
-					if ( $rows["gender"] == 1) {
-						echo '<i>Male </i>';
-					} else {
-						echo '<i>Female </i>';
-					}
-					if ( $rows["status"] == 2) {
-						echo '<span style="color: green;"> (Online)</span>';
-					} else {
-						echo '<span style="color: red;"> (Offline)</span>';
-					}
-				echo '</td>';
-				echo '<td>';
-					$array1 = $listregion->get('name, countrycode', "WHERE id = $rows[region]");
-					foreach($array1 as $rows1) {
-						echo $rows1["name"].' ';
-						echo $rows1["countrycode"];
-					}
-				echo '</td>';
-				echo '<td>';
-					echo "<a href=\"home.php?destinationh=$idh\" class='btn' style='font-size: 9px;'>Start chat</a>";
-				echo '</td>';
-			$count++;
+				if ( empty($array1)) {
+					$hobby = 'NA';
+				}
+			echo "<td><a href=\"particular_one.php?idh=$idh\">".$rows["username"].'<br/><span class="italic">'.$hobby.'</span></a></td>';
+			echo '<td>';
+				echo "<a href=\"home.php?destinationh=$idh\" class='btn' style='font-size: 9px;'>Start chat</a>";
+			echo '</td>';
+			echo '<td></td>';
 		}
 		echo '</table>';
 	}

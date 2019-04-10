@@ -25,6 +25,8 @@ $listhobby = new listhobby();
 $user = new user();
 
 if ( isset($_GET["add"]) && !empty($_GET["add"])) {
+
+	$_GET = $db->clean_array($_GET);
 ?>
 	<form action="upload.php" method="POST">
 
@@ -64,7 +66,7 @@ if ( isset($_GET["add"]) && !empty($_GET["add"])) {
 		</select>
 		<img src="myimage.php" width="130em;"/>
 		<input type="text" name="captcha" required="required" placeholder="Enter code above"/>
-		<button type="submit" name="register" class="button" value="register">Create account</button>
+		<button type="submit" name="register" class="btn" value="register">Create account</button>
 	</form>
 <?php
 }
@@ -109,8 +111,9 @@ if ( isset($_POST["register"])  && !empty($_POST["register"]) ) {
 			$_SESSION["idCHATP"] = $rows["id"];
 			$_SESSION["idhashCHATP"] = md5($rows["id"].md5($_SESSION["tsa_gong"]));
 		}
-		header('location: findfriends.php');
+		header('location: welcome.php');
 	} else {
 		echo '<div id="file_error">Registration failed</div>';
 	}
 }
+

@@ -1,5 +1,5 @@
-<?php include('head.php'); ?>
-<?php	
+<?php include('head.php'); 
+
 require_once CLASSES . 'class.likedislike.php';
 require_once CLASSES . 'class.log.php';
 require_once CLASSES . 'class.listregion.php';
@@ -90,6 +90,10 @@ a, p, b {
 }
 </style>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,600" rel="stylesheet">
+
+<input type="hidden" id="handle" value="<?php echo $_SESSION["idCHATP"];?>"/>
+<input type="hidden" id="user" value="<?php echo $_SESSION["AdminCHATP"];?>"/>
+
 <?php
 echo '<div id="particular_one">';
 if( isset($_GET["idh"]) && !empty($_GET["idh"])) {

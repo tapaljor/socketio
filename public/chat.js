@@ -7,51 +7,64 @@ var user = document.getElementById('user');
 var destination = document.getElementById('destination');
 var messageform = document.getElementById('messageform');
 
-//When event magic happens from client/front end
-socket.on('connect', function() {
-	socket.emit('new connection', user.value);
-});
-messageform.addEventListener('submit', function(e) {
+if ( messageform) {//When you are chatting with single user
 
-	e.preventDefault();
-	var data = {
-		message: message.value,
-		handle: handle.value,
-		user: user.value,
-		destination: destination.value
-	};
-	$("#message").val('');
-	socket.emit('chat', data);
-});
-message.addEventListener('keypress', function() {
+	//When event magic happens from client/front end to SERVER
+	messageform.addEventListener('submit', function(e) {
+		e.preventDefault();
+		var data = {
+			message: message.value,
+			source: handle.value,
+			user: user.value,
+			destination: destination.value
+		};
+		socket.emit('chat', data); //Message send to server to be sent to clients connected
 
-	var data = {
-		user: user.value,
-		handle: handle.value,
-		destination: destination.value
-	};
-	socket.emit('typing', data);
-});
+		//Saving message in database after it is send on socket
+		$.ajax ({
+			type: "POST",
+			url: "save_message.php",
+			data: {message: message.value, source: handle.value, destination: destination.value},
+			success: function() {
+				$("#message").val('');
+			}
+		});
+	});
+	message.addEventListener('keypress', function() {
+		var data = {
+			user: user.value,
+			source: handle.value,
+			destination: destination.value
+		};
+		socket.emit('typing', data);
+	});
+	//Events from server
+	socket.on('chat', function(data) {
+		feedback.innerHTML = 'Send';
+		if ( (data.destination === handle.value &&  
+			data.source === destination.value) ||
+			data.source === handle.value 
+			) { 
+			output.innerHTML = '<p><b>'+data.user+': </b><i>'+data.message+'</i></p>'+output.innerHTML;
+		} 
+	});
+	socket.on('typing', function(data) {
+		if ( data.source === destination.value && data.destination === handle.value) {
+			feedback.innerHTML = '<i>'+data.user+' is typing..</i>';
+		}
+	});
+}
 
-//Events from server
-socket.on('new connection', function(data) {
-	notification.innerHTML = '<p><a href="home.php?destinationh='+data+'">'+data+'</a></p>'+notification.innerHTML;
-});
-socket.on('disconnect', function() {
-	notification.innerHTML = '<p><i style="color: red;">'+handle.value+' left<i></p>'+notification.innerHTML;
-});
+//Event from server to clients
 socket.on('chat', function(data) {
-	feedback.innerHTML = 'Send';
-	if ( (data.destination === handle.value &&  
-		destination.value === data.handle ) ||
-		handle.value === data.handle
-		) { 
-		output.innerHTML = '<p><b>'+data.user+':</b> '+data.message+'</p>'+output.innerHTML;
+	if ( data.destination === handle.value) {
+		new_message.innerHTML = 'New message';
 	}
 });
-socket.on('typing', function(data) {
-	if ( data.handle === destination.value && data.destination === handle.value) {
-		feedback.innerHTML = '<i>'+data.user+' is typing..</i>';
-	}
+socket.on('new connection', function(data) {
+	notification.innerHTML = '<p style="color: green;">'+data+'</p>'+notification.innerHTML;
+});
+socket.on('left', function(data) {
+	notification.innerHTML = '<p style="color: red;">'+data+'</p>'+notification.innerHTML;
 });
 
