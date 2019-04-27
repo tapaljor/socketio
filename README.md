@@ -16,13 +16,14 @@
 <ul>
 <li> Go to public/chat.js, public/connect.js</li>
 <li> Replace localhost with your IP address</li>
-</li>
+</ul>
 
 ###Create database and import
 <ul>
 <li> Create database `chat` with username and password 'chat'</li>
 <li> Import SQL database from `chat-YYYY-mm-dd.sql' into your `chat` database</li>
 <li> Change database username and password in public/config.php</li>
+</ul>
 
 ###Granting permission to use uploads directory
 <ul>
