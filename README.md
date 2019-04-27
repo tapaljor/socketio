@@ -1,6 +1,6 @@
-# Socketio Websocket using Node.js and PHP
+# Socketio Websocket using Node.js and PHP#
 
-##Requirements: 
+##Requirements##
 	<ul>
 	<li> Node</li>
 	<li> express </li>
