@@ -127,7 +127,7 @@ class database {
     	function rename_file($filename) {
 
 	        if ($filename != '') {
-	            $filename = md5($filename . utility::gettime());
+			$filename = md5($filename . time());
 	        }
 	        return $filename;
     	}
@@ -174,10 +174,6 @@ class database {
 		unset($diffa["registerdate"]);
 		unset($diffa["idh"]);
 		return $name  = json_encode($diffa);
-	}
-	private function get_current_timestamp() {
-		$this->nowstamp = strtotime(date('Y-m-d H:i:s'));
-		return $this->nowstamp;
 	}
 	function match_hash_engine($table = '', $hash = '') {
 		$this->sql = "SELECT id FROM `$table` WHERE MD5(CONCAT(id, MD5('$_SESSION[tsa_gong]'))) = '$hash'";

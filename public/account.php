@@ -93,7 +93,6 @@ if( isset($_GET["edit"]) && !empty($_GET["edit"]) ) {
 	if ( $_GET["edit"] !== $_SESSION["idhashCHATP"]) {
 		die('Cannot find one');
 	}	
-
 	$conditions ="WHERE id = $id";
 	$array = $user->get('id, username, gender, country, region, hobby', $conditions);
 

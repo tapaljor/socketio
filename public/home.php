@@ -18,15 +18,12 @@ if ( isset($_GET["destinationh"]) && !empty($_GET["destinationh"])) {
 	<fieldset id="output">
 	<legend align="left"><?php echo $username;?></legend>
 	<?php
-	$array = $chat->get('*', "WHERE destination = $_SESSION[idCHATP] || source = $_SESSION[idCHATP] ORDER BY time DESC");
+	$array = $chat->get('*', "WHERE (destination = $_SESSION[idCHATP] && source = $id) || (source = $_SESSION[idCHATP] && destination = $id) ORDER BY time DESC");
 	foreach($array as $rows) {
 
 		$array1 = $user->get('username', "WHERE id = $rows[source]");
 		foreach($array1 as $rows1) {
 			$from = $rows1["username"];
-		}
-		if ( $from === $_SESSION["AdminCHATP"]) {
-			$from = 'you';
 		}
 		echo '<p><b>'.$from.': </b><i>'.$rows["message"].'</i></p>';
 	}

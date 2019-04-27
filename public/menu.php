@@ -9,7 +9,7 @@
 <?php
 if ( isset($_SESSION["AdminCHATP"]) && !empty($_SESSION["AdminCHATP"])) {
 	echo "<li><a>$_SESSION[AdminCHATP]</a></li>";
-	echo "<li><a href=\"welcome.php?logout=343defeffhiw\">logout</a></li>";
+	echo "<li><a href=\"welcome.php?logout=$_SESSION[tsa_gong]\">logout</a></li>";
 } else {
 	header('Location: index.php');
 }

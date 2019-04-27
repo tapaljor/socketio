@@ -32,7 +32,7 @@ if ( isset($_GET["add"]) && !empty($_GET["add"])) {
 
 		<h1>REGISTER</h1>
 
-		<input type='hidden' name='registerdate' value="<?php echo $nowstamp; ?>"/>
+		<input type='hidden' name='registerdate' value="<?php echo time(); ?>"/>
 		<input type="hidden" name="salt" value="<?php echo utility::create_token(); ?>"/>
 		<input type="text" placeholder="Nickname*" name="username" required="required" onchange="check_username(this.value)">
 		<div class="validate_username"></div>

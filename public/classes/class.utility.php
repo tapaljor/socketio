@@ -79,11 +79,15 @@ class utility {
 			echo '<tr><td style="height: 75px;"><div class="container4">';
 			if ( empty($rows["image"]) ) {
 				echo "<a href=\"particular_one.php?idh=$idh\" title='Click here for detail'>";
-				if( $rows["gender"] == 1) { 
-					echo '<img src="images/male.jpeg"/>';
+				if ( empty($rows["image"])) {
+					if( $rows["gender"] == 1) { 
+						echo '<img src="images/male.jpeg"/>';
+					} else {
+						echo '<img src="images/female.jpeg"/>';
+					}	
 				} else {
-					echo '<img src="images/female.jpeg"/>';
-				}	
+					echo "<img src=\"images/$rows[image]\"/>";
+				}
 				echo '</a>';
 			} else {
 				echo "<a href=\"particular_one.php?idh=$idh\"><img src=\"uploads/$rows[image]\" title='Click here for detail'/></a>";
@@ -96,11 +100,9 @@ class utility {
 				if ( empty($array1)) {
 					$hobby = 'NA';
 				}
-			echo "<td><a href=\"particular_one.php?idh=$idh\">".$rows["username"].'<br/><span class="italic">'.$hobby.'</span></a></td>';
-			echo '<td>';
-				echo "<a href=\"home.php?destinationh=$idh\" class='btn' style='font-size: 9px;'>Start chat</a>";
+			echo "<td><a href=\"particular_one.php?idh=$idh\">".$rows["username"].'<br/><span class="italic">'.$hobby.'</span></a>';
+				echo "<br/><br/><a href=\"home.php?destinationh=$idh\" class='btn' style='font-size: 9px;'>Start chat</a>";
 			echo '</td>';
-			echo '<td></td>';
 		}
 		echo '</table>';
 	}
@@ -150,10 +152,5 @@ class utility {
 			$array["$key"] = $word;
 		}
 		return $array;
-	}
-	static function gettime() {
-
-		$now = date('Y-m-d H:i:s');
-		return $nowstamp = strtotime($now);
 	}
 }

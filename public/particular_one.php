@@ -15,14 +15,16 @@ $listcountry = new listcountry();
 $listhobby = new listhobby();
 ?>
 <style>
-a, p, b {
-	margin: 0;
-	font-family: 'Open Sans', sans-serif; 
+* {
+	font-family: 'Raleway', sans-serif;
+  	color: #333;
+	font-size: 13px;
 	font-weight: normal;
+	letter-spacing: 1px;
+	margin: auto;
 	text-decoration: none;
 }
 #particular_one {
-	width: 700px;
 	margin: auto;
 }
 .picture {
@@ -39,20 +41,6 @@ a, p, b {
 	width: 130px;
 	height: 130px;
 	border-radius: 50%;
-}
-.picture .circle {
-	position: absolute;
-	border-radius: 50%;
-	border: 1px solid;
-	transition: all 1.6s ease-in;
-}
-.picture .circle2 {
-	width: 140px;
-	height: 140px;
-	border-color: #ddd transparent #333 #aaa;
-}
-.picture:hover .circle2 {
-	transform: rotate(-360deg);
 }
 .name {
 	width: 100%;
@@ -90,10 +78,6 @@ a, p, b {
 }
 </style>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,600" rel="stylesheet">
-
-<input type="hidden" id="handle" value="<?php echo $_SESSION["idCHATP"];?>"/>
-<input type="hidden" id="user" value="<?php echo $_SESSION["AdminCHATP"];?>"/>
-
 <?php
 echo '<div id="particular_one">';
 if( isset($_GET["idh"]) && !empty($_GET["idh"])) {
@@ -114,7 +98,6 @@ if( isset($_GET["idh"]) && !empty($_GET["idh"])) {
 				echo '<img src="images/female.jpeg"/>';
 			}
 		}?>
-		<div class="circle circle2"></div>
 	</div>
 	<div class="name">
 		<?php echo "<p><a href=\"account.php?imageedit=$_GET[idh]\">Change photo</a></p>";?>

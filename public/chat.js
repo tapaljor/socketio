@@ -1,5 +1,5 @@
 //When event happens in client/front end
-var socket = io.connect('http://localhost:4000');
+var socket = io.connect("http://192.168.2.239:4000");
 
 var message = document.getElementById('message');
 var handle = document.getElementById('handle');
@@ -47,24 +47,43 @@ if ( messageform) {//When you are chatting with single user
 			) { 
 			output.innerHTML = '<p><b>'+data.user+': </b><i>'+data.message+'</i></p>'+output.innerHTML;
 		} 
+		if ( data.destination === handle.value) {
+			new_message.innerHTML = 'New message';
+		}
 	});
 	socket.on('typing', function(data) {
 		if ( data.source === destination.value && data.destination === handle.value) {
 			feedback.innerHTML = '<i>'+data.user+' is typing..</i>';
 		}
 	});
-}
-
+} 
 //Event from server to clients
 socket.on('chat', function(data) {
 	if ( data.destination === handle.value) {
+		var audio = new Audio('https://i.cloudup.com/y29czRwU3R.m4a');
+    		audio.play();
 		new_message.innerHTML = 'New message';
 	}
 });
+//Event from server to clients
 socket.on('new connection', function(data) {
-	notification.innerHTML = '<p style="color: green;">'+data+'</p>'+notification.innerHTML;
+	$.ajax ({
+		type: "POST",
+		url: "notification.php",
+		data: {type: 'join', username: data.user, id: data.id},
+		success: function(data) {
+			$("#notification").html(data);
+		}
+	});
 });
 socket.on('left', function(data) {
-	notification.innerHTML = '<p style="color: red;">'+data+'</p>'+notification.innerHTML;
+	$.ajax ({
+		type: "POST",
+		url: "notification.php",
+		data: {type: 'left', data: data},
+		success: function(data) {
+			$("#notification").html(data);
+		}
+	});
 });
 

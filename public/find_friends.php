@@ -1,9 +1,5 @@
-<?php require_once('head.php');?>
+<?php require_once('head.php');
 
-<input type="hidden" id="handle" value="<?php echo $_SESSION["idCHATP"];?>"/>
-<input type="hidden" id="user" value="<?php echo $_SESSION["AdminCHATP"];?>"/>
-
-<?php
 require_once CLASSES . 'class.user.php';
 $user = new user();
 
@@ -20,9 +16,11 @@ if ( isset($_POST["search"]) && !empty($_POST["search"])) {
 	utility::member($array, 0);
 	die();
 }
+echo '<p style="text-align: center;"><input type="text" name="search_username" style="width: 300px;" 
+	placeholder="Search" onkeyup="search_username(this.value); return false;"/></p>';
 echo '<div id="loadmore">';
 	$conditions = "ORDER BY id DESC LIMIT 0, 10";
-	$array = $user->get('*', $conditions); //Loading page one after another first the start page is 0
+	$array = $user->get('id, username, gender, hobby, image', $conditions); //Loading page one after another first the start page is 0
 	utility::member($array, 0);
 echo '</div>';
 echo "<br/><p style='text-align: center;'><a href='#' class='btn' onclick=\"loadmore(); return false;\">LOAD MORE</a></p>";
@@ -34,7 +32,6 @@ $headers = "From: tapaljor@gmail.com"."\r\n";
 $headers .="Content-type: text/html\r\n";
 
 /*$mail = mail($to, $subject, $body, $headers);
-
 if ( $mail) {
 	echo "*ok*";
 } else {

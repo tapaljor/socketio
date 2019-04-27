@@ -1,4 +1,10 @@
 from = 11;
+function session_checking() {
+    $.post("activitytime.php");
+}
+//Every after 7 mins (60*7) after browswer is inactive run activitytime.php where it logs out properly
+setInterval(session_checking, 1000*470);
+
 function loadmore() {
 
 	$.ajax ({
@@ -62,20 +68,15 @@ function compare_password(password, re_password) {
 		$(".btn").show();
 	}
 }
-function search_ads(obj) {
-
-	var name1 = obj.value;
-
+function search_username(ming) {
 	$.ajax ({
 		type: "POST",
-		url: "search_ads.php",
-		data: { name: name1 },
-
+		url: "search_username.php",
+		data: {ming: ming},
 		success: function(data) {
-			$("#loadmoread").html(data);
+			$("#loadmore").html(data);
 		}
 	});
-	return false;
 }
 function search_country(obj) {
 

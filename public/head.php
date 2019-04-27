@@ -25,6 +25,8 @@ if (!isset($_SESSION["AdminCHATP"]) || empty($_SESSION["AdminCHATP"])) {
 	<?php require_once('menu.php');?>
 </div>
 <div id="main">
-<div id="notification"></div>
+<div id="notification"><?php require_once('notification.php');?></div>
+<input type="hidden" id="handle" value="<?php echo $_SESSION["idCHATP"];?>"/>
+<input type="hidden" id="user" value="<?php echo $_SESSION["AdminCHATP"];?>"/>
 <div id="content">
 

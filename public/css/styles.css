@@ -18,7 +18,7 @@ body {
 	padding-top: 4.5em;
 }
 #notification {
-	width: 20%;
+	width: 25%;
 	float: left;
     	height: 498px;
     	overflow: auto;
@@ -26,7 +26,7 @@ body {
 }
 #content {
 	float: right;
-	width: 77%;
+	width: 72%;
 }
 #notification a, p {
 	font-size: 10px;
@@ -206,9 +206,11 @@ table th {
 	margin-bottom: .625em;
 	}
 	table td {
+		clear: both;
 	display: block;
 	font-size: .8em;
 	text-align: center;
+	vertical-align: middle;
 	}
 	table td::before {
 	/*

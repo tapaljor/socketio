@@ -3,7 +3,7 @@ var socket = require('socket.io');
 
 var app = express();
 var server = app.listen(4000, function() {
-	console.log('server is initiated :4000');
+	console.log('Server created with : 4000');
 });
 
 var io = socket(server);
