@@ -12,7 +12,8 @@
 		</ul>
 	</li>
 </ul>
-### Change your IP address accordingly
+
+### Change your IP address 
 <ul>
 <li> Go to public/chat.js, public/connect.js</li>
 <li> Replace localhost/given IP with your own IP address</li>
