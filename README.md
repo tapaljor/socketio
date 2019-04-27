@@ -1,6 +1,6 @@
-# Socketio Websocket using Node.js and PHP#
+# Socketio Websocket using Node.js and PHP
 
-##Requirements##
+## Requirements
 	<ul>
 	<li> Node</li>
 	<li> express </li>
@@ -13,13 +13,13 @@
 	</li>
 	</ul>
 
-##Change your IP address accordingly
+## Change your IP address accordingly
 <ul>
 <li> Go to public/chat.js, public/connect.js</li>
 <li> Replace localhost with your IP address</li>
 </ul>
 
-##Create database and import
+## Create database and import
 <ul>
 <li> Create database `chat` with username and password 'chat'</li>
 <li> Import SQL database from `chat-YYYY-mm-dd.sql` into your `chat` database</li>
