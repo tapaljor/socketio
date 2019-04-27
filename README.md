@@ -11,6 +11,7 @@
 		<li> In Windows install LAMP after downloading WAMP from http://www.wampserver.com/en/</li>
 		</ul>
 	</li>
+	</ul>
 
 ##Change your IP address accordingly
 <ul>
