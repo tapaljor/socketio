@@ -15,7 +15,7 @@
 ### Change your IP address accordingly
 <ul>
 <li> Go to public/chat.js, public/connect.js</li>
-<li> Replace localhost with your IP address</li>
+<li> Replace localhost/given IP with your own IP address</li>
 </ul>
 
 ### Create database and import
