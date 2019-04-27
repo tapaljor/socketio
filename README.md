@@ -7,7 +7,7 @@
 	<li> socket.io </li>
 	<li> LAMP 
 		<ul>
-	 	<li> In Linux install as sudo <i>apt-get install lamp-server^</i></li>
+	 	<li> In Linux (Ubuntu) install as <i>sudo apt-get install lamp-server^</i></li>
 		<li> In Windows install LAMP after downloading WAMP from <i>http://www.wampserver.com/en/</i></li>
 		</ul>
 	</li>
@@ -25,12 +25,12 @@
 <li> Change database username and password in public/config.php</li>
 </ul>
 
-###Granting permission to use uploads directory
+### Granting permission to use uploads directory
 <ul>
 <li> There is uploads directory in public/
 Occassionally you have to give permission to upload image into this directory.
 </li>
 </ul>
  
-###Run server on with command: node index.js
+### Run server on with command: node index.js
 
