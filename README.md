@@ -7,8 +7,8 @@
 	<li> socket.io </li>
 	<li> LAMP 
 		<ul>
-	 	<li> In Linux install as sudo apt-get install lamp-server^</li>
-		<li> In Windows install LAMP after downloading WAMP from http://www.wampserver.com/en/</li>
+	 	<li> In Linux install as sudo <i>apt-get install lamp-server^</i></li>
+		<li> In Windows install LAMP after downloading WAMP from <i>http://www.wampserver.com/en/</i></li>
 		</ul>
 	</li>
 </ul>
