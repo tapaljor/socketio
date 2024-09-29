@@ -1,0 +1,92 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
+* {
+	font-family: 'Raleway', sans-serif;
+  	color: #333;
+	font-size: 13px;
+	font-weight: normal;
+	letter-spacing: 1px;
+	margin: auto;
+}
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI';
+}
+form {
+	width: 25%;
+	margin: 5em auto;
+  padding: 1em;
+  border: solid 3px #ddd;
+}
+select, input {
+  width: 100%;
+  background: transparent;
+  border-bottom: solid 1px #ddd;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-size: 1rem;
+  padding: 0.5em 0.4em;
+  transition: all 0.4s;
+  color: #000;;
+  margin: 0.7rem auto;
+}
+select:focus, input:focus {
+  transform: scale3d(1.06,1.06,1.06);
+}
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+#register, input[type=submit], button {
+  background: transparent;
+  width: 100%;
+  font-size: 1rem;
+  border: solid 1px #ddd;
+  padding: 1em 0;
+  color: #000;
+  transition: all 0.6s;
+}
+button:hover {
+  cursor:pointer;
+}
+h1 {
+	font-size: 1.5em;
+  color: #000;
+  padding: .8em 0 0.8em 0;
+  width: 50%;
+  margin-left: 25%;
+  margin-bottom: 1em;
+  font-weight: normal;
+  text-align: center;
+}
+h6 {
+	text-align: center;
+	border: 2px solid #ddd;
+	border-radius: 9px;
+	color: red;
+	width: 50%;
+	padding: 1em;
+	text-transform: uppercase;
+	margin: 1em auto;
+}
+@media screen and (max-width: 782px) {
+ form {
+  	 width: 80%;
+	margin: 5em auto;
+ }
+ input, input[type=submit], button {
+	 width: 100%;
+    font-size: 1em;
+  }
+  h1 {
+	  font-size: 1.5em;
+  }
+}
+.validate_password, .validate_username {
+	text-transform: uppercase;
+	text-align: right;
+}

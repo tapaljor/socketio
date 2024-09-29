@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.io Chat</title>
+</head>
+<body>
+    <h1>Socket.io Chat Application</h1>
+
+    <div id="chat-window">
+        <div id="output"></div>
+        <div id="actions"></div>
+    </div>
+
+    <input id="username" type="text" placeholder="Username">
+    <input id="message" type="text" placeholder="Enter your message">
+    <button id="send" onclick="sendMessage()">Send</button>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io.connect('http://localhost:3000');
+
+        // Handle 'new connection' event
+        socket.emit('new connection', {username: 'User joined the chat'});
+
+        socket.on('chat', function(data) {
+            document.getElementById('output').innerHTML += '<p><strong>' + data.username + ': </strong>' + data.message + '</p>';
+        });
+
+        socket.on('typing', function(data) {
+            document.getElementById('actions').innerHTML = '<p><em>' + data + ' is typing...</em></p>';
+        });
+
+        // Send Message to Server
+        function sendMessage() {
+            var username = document.getElementById('username').value;
+            var message = document.getElementById('message').value;
+
+            socket.emit('chat', {username: username, message: message});
+            document.getElementById('message').value = '';  // Clear input field
+        }
+
+        // Broadcast 'typing' event
+        document.getElementById('message').addEventListener('keypress', function() {
+            var username = document.getElementById('username').value;
+            socket.emit('typing', username);
+        });
+    </script>
+</body>
+</html>

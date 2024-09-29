@@ -1,0 +1,257 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
+* {
+	font-family: 'Raleway', sans-serif;
+  	color: #333;
+	font-size: 13px;
+	font-weight: normal;
+	letter-spacing: 1px;
+	margin: auto;
+	text-decoration: none;
+}
+body {
+	margin: 0; 
+	padding: 0;
+}
+#main {
+	margin: auto;
+	width: 80%;
+	padding-top: 4.5em;
+}
+#notification {
+	width: 25%;
+	float: left;
+    	height: 498px;
+    	overflow: auto;
+	border-right: .5px solid #ddd;
+}
+#content {
+	float: right;
+	width: 72%;
+}
+#notification a, p {
+	font-size: 10px;
+}
+#notification p, #notification a {
+	color: #000;
+	padding: .5em 0 0 .5em;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+#output {
+    	height: 500px;
+    	overflow: auto;
+	border: none;
+}
+#output legend {
+	background-color: #ddd;
+	padding: .7em;
+	text-transform: uppercase;
+	border-radius: 5px;
+	margin-left: -1%;
+}
+#output p {
+	padding: .5em 0 0 .5em;
+	font-size: 1em;
+}
+#output b {
+	text-transform: uppercase;
+}
+.italic {
+	text-decoration: italic;
+	text-transform: Capitalize;
+}
+#footer {
+	clear: both;
+	padding: 2em .5em;
+	margin: auto;
+	font-size: .7em;
+	color: gray;
+	font-style: italic;
+	text-align: center;
+}
+#message, input {
+	clear: both;
+	width: 100%;
+	padding: 10px 20px;
+	border: 2px solid #ddd;
+	border-radius: 9px;
+	margin: .5em auto;
+	background-color: #fff;
+	height: 47px; 
+	font-size: 16px;
+}
+#send {
+	clear: both;
+	width: 100%;
+	background: #6698FF;
+	text-transform: uppercase;
+	color: #fff;
+	font-size: 15px;
+	border: 0;
+	padding: 12px 0;
+	margin: .5em auto;
+	border-radius: 5px;
+}
+#loadmore {
+	clear: both;
+	width: 80%;
+	text-decoration: none;
+}
+.btn {
+	border: 1px solid #786450;
+	border-radius: 20px;
+	padding: 5px 20px;
+	font-size: 11px;
+}
+.btn:hover {
+	background-color: #786450;
+	color: white;
+}
+.container4 {
+	position: relative;
+	width: 7em;
+	height: 4em;
+	overflow: hidden;
+}
+.container4 img {
+	width: 100%;
+}
+#new_message p {
+	text-transform: uppercase;
+	color: red;
+}
+h6 {
+	text-align: center;
+	border: 2px solid #ddd;
+	border-radius: 9px;
+	color: red;
+	width: 50%;
+	padding: 1em;
+	text-transform: uppercase;
+	margin: 1em auto;
+}
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em 0;
+}
+table th,
+table td {
+  padding: .5em 0;
+  text-align: left;
+}
+table i {
+	text-transform: Capitalize;
+}
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+}
+.inputfile {
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+	clear: both;
+}
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: #333;
+    background-color: black;
+    display: inline-block;
+    border: 1px solid #ddd;
+	padding: 1em;
+	background-color: #fff;
+	border-radius: 9px;
+	margin: 0 0 1em 0;
+}
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: #ddd;
+}
+@media screen and (max-width: 782px) {
+
+	table {
+	border: 0;
+	}
+	table caption {
+	font-size: 1.3em;
+	}
+	table thead {
+	border: none;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	}
+	table tr {
+	display: block;
+	margin-bottom: .625em;
+	}
+	table td {
+		clear: both;
+	display: block;
+	font-size: .8em;
+	text-align: center;
+	vertical-align: middle;
+	}
+	table td::before {
+	/*
+	* aria-label has no advantage, it won't be read inside a table
+	content: attr(aria-label);
+	*/
+	content: attr(data-label);
+	float: left;
+	font-weight: bold;
+	text-transform: uppercase;
+	}
+	table td:last-child {
+		border-bottom: 0;
+	}
+	.container4 {
+		width: 100px;
+		height: 100px;
+	}
+	.container4 img {
+		width: 70px;
+		height: 70px;
+		border-radius: 50%;
+	}
+	#notification {
+		display: none;
+	}
+	#output {
+		width: 90%;
+		height: 500px;
+		margin: auto;
+	}
+	#message, #send {
+		clear: both;
+		width: 100%;
+		margin: 1em auto 0 auto;
+	}
+	#main {
+		width: 90%;
+	}
+	#content {
+		width: 100%;
+	}
+}
+
