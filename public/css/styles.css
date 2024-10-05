@@ -1,142 +1,229 @@
-/* Global styles */
-body {
-    font-family: Arial, sans-serif;
+/* Global Styles */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    background-color: #f4f4f4;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    background-color: #fff;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Menu styles */
+.menu {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* Desktop Links */
+.desktop-only {
+    display: inline-block;
+}
+
+.nav-link {
+    font-size: 1rem;
+    color: #333;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+/* Mobile-specific elements */
+.mobile-toggle {
+    display: none;
+}
+
+.mobile-label {
+    display: none;
+    font-size: 1rem;
+    color: purple;
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid purple;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+}
+
+/* Hidden mobile menu */
+.mobile-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* When the checkbox is checked, show the mobile menu */
+#mobile-menu-toggle:checked + .mobile-label + .mobile-menu {
+    display: flex;
 }
 
 /* Main container */
 main {
-    margin: auto;
-    width: 80%;
-    border: 2px solid red;
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Chat Left: User list */
+#notifications {
+    list-style: none;
+    padding: 0;
+}
+
+/* Chat Center: Private chat */
+#chat-center {
+    flex: 2;
+    padding: 20px;
+}
+
+#chat-center h1 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+#output {
+    background-color: #f9f9f9;
+    height: 250px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    list-style-type: none;
+}
+#user-list {
+    list-style-type: none;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    overflow: hidden;
-    height: 90vh;
-}
-
-/* Left side: Personal chat interface */
-#chat-left {
-    flex: 1;
-    padding: 20px;
-    border-right: 2px solid #ccc;
-    background-color: #f0f0f0;
-    min-height: 100vh; /* Ensure it fills the entire height */
-}
-#chat-left h1 {
-    margin-top: 0;
-}
-#output {
-    background-color: #fff;
-    height: 60%; /* Can adjust dynamically */
-    padding: 10px;
-    border-radius: 8px;
-    overflow-y: auto;
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
+    column-gap: 1rem;
 }
 input[type="text"] {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-bottom: 10px;
+    width: 100%;
+    padding: 12px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    font-family: 'Georgia', serif;
     box-sizing: border-box;
 }
+
 button {
-    width: calc(100% - 20px);
-    padding: 10px;
-    background-color: #4CAF50;
+    width: 100%;
+    padding: 12px;
+    background-color: #333;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
 }
+
 button:hover {
-    background-color: #45a049;
-}
-#chat-left {
-    flex: 1;
-    padding: 20px;
-    border-right: 2px solid #ccc;
-    background-color: #f0f0f0;
-    min-height: 100vh; /* Ensure it fills the entire height */
-}
-#chat-left a {
-    display: block; /* Ensures that each message takes the full width */
-    color: #000;
-    text-decoration: none;
-    border-top: 1px solid #000;
-    border-bottom: 1px solid #000;
-    padding: 1rem;
-    margin-bottom: 10px; /* Adds space between messages */
-    background-color: #fff;
-    word-wrap: break-word; /* Ensure long messages don't overflow */
+    background-color: #555;
 }
 
-#chat-center {
-    flex: 3;
-    padding: 20px;
-    border-right: 2px solid #ccc;
-    background-color: #f0f0f0;
-    min-height: 100vh; /* Ensure it fills the entire height */
-}
-
-/* Right side: Common chat area (lounge) */
+/* Chat Right: Lounge */
 #chat-right {
     flex: 1;
     padding: 20px;
-    background-color: #ffffff;
-    min-height: 100vh; /* Ensure full height */
-}
-
-#chat-right h2 {
-    margin-top: 0;
-}
-
-/* Style for the lounge container */
-#lounge {
-    background-color: #fafafa;
+    border-left: 1px solid #ddd;
+    background-color: #f9f9f9;
     padding: 20px;
-    height: calc(100vh - 80px); /* Fill screen, considering padding or margins */
-    border-radius: 8px;
-    overflow-y: auto;
+    border-radius: 4px;
     border: 1px solid #ddd;
+    max-height: 430px;
+    overflow-y: auto;
 }
-
-/* Style for each message */
-#lounge a {
-    display: block; /* Ensures that each message takes the full width */
-    color: #000;
+#chat-right h1 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-family: 'Arial', sans-serif;
+}
+#chat-right p {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    color: #555;
+}
+a {
+    color: #333;
     text-decoration: none;
-    border-top: 1px solid #000;
-    border-bottom: 1px solid #000;
-    padding: 1rem;
-    margin-bottom: 10px; /* Adds space between messages */
+    font-size: 1rem;
+    display: block;
+    transition: color 0.3s ease;
+}
+a:hover {
+    color: #000;
+}
+p {
+    margin-bottom: 1rem;
+}
+select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
     background-color: #fff;
-    word-wrap: break-word; /* Ensure long messages don't overflow */
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    margin-bottom: 1rem;
+}
+select:focus {
+    border-color: #333;
+}
+option {
+    padding: 10px;
+    font-size: 1rem;
 }
 
-/* Media queries for mobile responsiveness */
+/* Mobile View */
 @media (max-width: 768px) {
     main {
-        flex-direction: column; /* Stack chat-left and chat-right vertically on mobile */
+        display: flex;
+        flex-direction: column;
     }
-    #chat-left {
-        border-right: none; /* Remove the border on smaller screens */
-        border-bottom: 2px solid #ccc; /* Add a border at the bottom */
+    .desktop-only {
+        display: none;
+    }
+    /* Show the "///" button in mobile view */
+    .mobile-label {
+        display: inline-block;
+    }
+    .nav-link {
+        margin-bottom: 10px;
     }
     #chat-right {
-        min-height: auto; /* Allow dynamic height on mobile */
+        max-height: 200px;
     }
 }

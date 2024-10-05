@@ -1,24 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Socket.io Chat</title>
-    <link rel="stylesheet" href="/css/styles.css"> <!-- Link your CSS file -->
-</head>
-
-<body>
-    <main>
-        <article id="chat-center">
-            <form action="/start" method="POST">
-                <input id="username" type="text" placeholder="Enter your username" name="username">
-                <button id="userJoin">Start</button>
-            </form>
-        </article>
-    </main>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/chat.js"></script>
-</body>
-
-</html>
+{{>header}}
+<main>
+    <!-- Center: Private chat section -->
+    <article id="chat-center">
+        {{#if too}}
+        {{#if fromm}}
+        <h1>Private Chat with {{too}}</h1>
+        <ul id="output"></ul>
+        <input type="hidden" id="fromm" name="fromm" value="{{fromm}}" />
+        <input type="hidden" id="too" name="too" value="{{too}}" />
+        <input id="message" name="message" type="text" placeholder="Message..">
+        <button id="sendMessage">Send</button>
+        {{else}}
+        <p>Please go to home and enter nickname/username to start.</p>
+        {{/if}}
+        {{else}}
+        <p>Welcome to private chat. Please enter nickname/username to start. We do not ask any personal information. We
+            do not keep chat history.</p>
+        <input id="username" name="username" type="text" placeholder="Enter your username" required="required">
+        {{#if rooms}}
+        <select id="room" name="room">
+            <option value="0">Select room</option>
+            {{#each rooms}}
+            <option value="{{this.name}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+        {{/if}}
+        <button id="userJoin" type="submit">Start</button>
+        {{/if}}
+    </article>
+    <!-- Right side: Lounge for all users -->
+    <article id="chat-right">
+        <p id="actions">...</p>
+        <h1>Notifications</h1>
+        <ul id="notifications"> </ul>
+    </article>
+</main>
+{{>footer}}

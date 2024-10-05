@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.io Chat</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Link your CSS file -->
+    <!-- Navigation menu -->
+    <nav class="menu">
+        <!-- Desktop Links -->
+        <a href="/" class="nav-link desktop-only">Home</a>
+        <a href="/users" class="nav-link desktop-only" id="users-link">Users</a>
+
+        <!-- Mobile Menu Trigger (///) -->
+        <input type="checkbox" id="mobile-menu-toggle" class="mobile-toggle">
+        <label for="mobile-menu-toggle" class="mobile-label">///</label>
+
+        <!-- Mobile Menu (Initially hidden) -->
+        <div class="mobile-menu">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/users" id="mobile-users-link" class="nav-link">Users</a>
+        </div>
+    </nav>
+</head>
+<body>

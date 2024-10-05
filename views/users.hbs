@@ -1,0 +1,31 @@
+{{>header}}
+<main>
+    <article id="chat-center">
+        <ul id="output"></ul>
+        <h1>Users</h1>
+        {{#if rooms}}
+        <select id="room" name="room">
+            <option value="0">Select room</option>
+            {{#each rooms}}
+            <option value="{{this.name}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+        {{/if}}
+        {{#if users}}
+        <ul id="user-list">
+            {{#each users}}
+            <li><a href="/to/{{this.username}}">{{this.username}}</a></li>
+            {{/each}}
+        </ul>
+        {{else}}
+        <p>Please enter nickname/username to chat.</p>
+        {{/if}}
+    </article>
+    <!-- Right side: Lounge for all users -->
+    <article id="chat-right">
+        <p id="actions">...</p>
+        <h1>Notifications</h1>
+        <ul id="notifications"> </ul>
+    </article>
+</main>
+{{>footer}}
