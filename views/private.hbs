@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.io Chat</title>
+    <link rel="stylesheet" href="/css/styles.css"> <!-- Link your CSS file -->
+</head>
+<body>
+    <main>
+        <!-- Left side: User's personal chat interface -->
+        <article id="chat-left">
+            {{#if users}}
+            {{#foreach users}}
+                <a href="/{{users.socketId}}">{{users.username}}</a>
+            {{/foreach}}
+            {{/if}}
+        </article>
+        <article id="chat-center">
+            <h1>Personal Chat</h1>
+            <section id="output"></section> <!-- Displays the user's own messages -->
+            <input id="username" type="text" placeholder="Enter your username">
+            <input id="to" type="text" value="{{to}}">
+            <input id="message" type="text" placeholder="Type your message">
+            <button id="send" onclick="sendMessage()">Send</button>
+        </article>
+        <!-- Right side: Lounge for all users -->
+        <article id="chat-right">
+            <h2>Lounge - Common Chat Area</h2>
+            <section id="lounge">
+                <!-- Lounge for all users to see the common messages -->
+                <p id="actions">All users' common messages will appear here...</p>
+            </section>
+        </article>
+    </main>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/chat.js"></script> 
+</body>
+
+</html>
